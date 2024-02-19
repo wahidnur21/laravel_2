@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detail_transactions', function (Blueprint $table) {
-            $table->string('id');
-            $table->string('id_barang');
-            $table->string('count');
+            $table->id();
             $table->string('nota');
+            $table->string('id_stuff');
+            $table->integer('count')->default(0);
+            $table->double('price')->default(0);
+            $table->double('discount')->default(0);
             $table->timestamps();
         });
     }
