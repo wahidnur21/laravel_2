@@ -13,7 +13,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return view('categori.list');
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('categori.add');
     }
 
     /**

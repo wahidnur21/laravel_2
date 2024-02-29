@@ -13,7 +13,7 @@ class StuffController extends Controller
      */
     public function index()
     {
-        //
+       return view('stuff.list');
     }
 
     /**
@@ -21,7 +21,7 @@ class StuffController extends Controller
      */
     public function create()
     {
-        //
+        return view('stuff.add');
     }
 
     /**

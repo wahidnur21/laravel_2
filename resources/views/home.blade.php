@@ -1,5 +1,7 @@
 @extends('templete.index')
 
+@section('title', 'Home')
+
 @section('content')
 
   <!-- Content Wrapper. Contains page content -->

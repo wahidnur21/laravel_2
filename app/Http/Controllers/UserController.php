@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\detail_transactions;
-use App\Http\Requests\Storedetail_transactionsRequest;
-use App\Http\Requests\Updatedetail_transactionsRequest;
+use Illuminate\Http\Request;
 
-class DetailTransactionsController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('detail.list');
+        return view('user.list');
     }
 
     /**
@@ -21,13 +19,13 @@ class DetailTransactionsController extends Controller
      */
     public function create()
     {
-        return view('detail.add');
+        return view('user.add');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Storedetail_transactionsRequest $request)
+    public function store(StoreuserRequest $request)
     {
         //
     }
@@ -35,7 +33,7 @@ class DetailTransactionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(detail_transactions $detail_transactions)
+    public function show(user $user)
     {
         //
     }
@@ -43,7 +41,7 @@ class DetailTransactionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(detail_transactions $detail_transactions)
+    public function edit(user $user)
     {
         //
     }
@@ -51,7 +49,7 @@ class DetailTransactionsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatedetail_transactionsRequest $request, detail_transactions $detail_transactions)
+    public function update(UpdateuserRequest $request, user $user)
     {
         //
     }
@@ -59,8 +57,9 @@ class DetailTransactionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(detail_transactions $detail_transactions)
+    public function destroy(user $user)
     {
         //
     }
 }
+

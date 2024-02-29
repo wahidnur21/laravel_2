@@ -13,7 +13,12 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        //
+
+        //query eloquen
+        $customers = customer::all(); 
+        return view('customer.list', [
+            'data' => $customers,
+        ]);
     }
 
     /**
@@ -21,7 +26,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.add');
     }
 
     /**
@@ -29,7 +34,9 @@ class CustomersController extends Controller
      */
     public function store(StorecustomersRequest $request)
     {
-        //
+        Customer::create($request->all());
+        return redirect('/customer');
+        
     }
 
     /**
@@ -61,6 +68,7 @@ class CustomersController extends Controller
      */
     public function destroy(customers $customers)
     {
-        //
+        $customer->delete();
+        return redirect('/customer');
     }
 }
