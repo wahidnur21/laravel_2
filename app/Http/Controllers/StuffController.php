@@ -13,7 +13,11 @@ class StuffController extends Controller
      */
     public function index()
     {
-       return view('stuff.list');
+          //query eloquen
+          $stuffs = stuff::all(); 
+          return view('stuff.list', [
+              'data' => $stuffs,
+          ]);
     }
 
     /**
@@ -29,7 +33,8 @@ class StuffController extends Controller
      */
     public function store(StoreStuffRequest $request)
     {
-        //
+        stuff::create($request->all());
+        return redirect('/stuffs');
     }
 
     /**
@@ -37,7 +42,9 @@ class StuffController extends Controller
      */
     public function show(Stuff $stuff)
     {
-        //
+        return view('stuff.add', [
+            'data' => $stuff,
+        ]);
     }
 
     /**
@@ -53,7 +60,10 @@ class StuffController extends Controller
      */
     public function update(UpdateStuffRequest $request, Stuff $stuff)
     {
-        //
+        $stuff->fill($request->all());
+        $stuff->save();
+
+         return redirect('/stuffs');
     }
 
     /**
@@ -61,6 +71,7 @@ class StuffController extends Controller
      */
     public function destroy(Stuff $stuff)
     {
-        //
+        $stuff->delete();
+        return redirect('/stuffs');
     }
 }

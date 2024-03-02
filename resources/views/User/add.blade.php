@@ -1,9 +1,8 @@
 @extends('templete.index')
 
-@section('title', 'user')
+@section('title', 'categori')
 
 @section('content')
 
-ini adalah halaman add user
-
+ 
 @endsection

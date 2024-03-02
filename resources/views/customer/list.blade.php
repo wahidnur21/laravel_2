@@ -1,6 +1,6 @@
 @extends('templete.index')
 
-@section('title', 'customer')
+@section('title', 'Home')
 
 @section('content')
 
@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data_Customer</h1>
+            <h1>Data Customer</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -43,6 +43,7 @@
                       <th>Alamat</th>
                       <th>Jenis Kelamin</th>
                       <th>Status</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -50,18 +51,20 @@
                    @foreach ($data as $item)
                <tr>
                   <td>{{ $item->id }}</td>
-                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->name }}</td>
                   <td>{{ $item->address }}</td>
-                  <td>{{ $item->status == 1 ? 'Aktif' : 'Tidak'}}</td>
                   <td>{{ $item->gender == 1 ? 'Laki-laki' : 'Perempuan' }}</td>
-                  <td style="max-width: 50px">
+                   <td>{{ $item->status == 1 ? 'Aktif' : 'Tidak'}}</td>
+                  <td>
+                    <a href="/customers/{{ $item->id }}">
                           <button type="button" class="btn btn-warning btn-sm">
                           <i class="far fa-edit"></i></button>
+                    </a>
                           
-                      <form action="/customer/{{ $item->id }}" method="GET">
+                      <form action="/customers/{{ $item->id }}" method="GET">
                           @csrf
                           @method('DELETE')
-                          <button type="submit" class="btn btn-denger btn-sm">
+                          <button type="submit" class="btn btn-danger btn-sm">
                            <i class="far fa-trash-alt"></i></button>
                       </form>
                   </td>
@@ -84,4 +87,5 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
 @endsection

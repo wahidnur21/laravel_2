@@ -13,7 +13,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('categori.list');
+          //query eloquen
+          $categories = categori::all(); 
+          return view('categori.list', [
+              'data' => $categories,
+          ]);
     }
 
     /**
@@ -29,7 +33,8 @@ class CategoriesController extends Controller
      */
     public function store(StorecategoriesRequest $request)
     {
-        //
+        categori::create($request->all());
+        return redirect('/categories');
     }
 
     /**
@@ -37,7 +42,9 @@ class CategoriesController extends Controller
      */
     public function show(categories $categories)
     {
-        //
+        return view('categori.add', [
+            'data' => $categori,
+        ]);
     }
 
     /**
@@ -53,7 +60,11 @@ class CategoriesController extends Controller
      */
     public function update(UpdatecategoriesRequest $request, categories $categories)
     {
-        //
+        
+        $categori->fill($request->all());
+        $categori->save();
+
+         return redirect('/categories');
     }
 
     /**
@@ -61,6 +72,7 @@ class CategoriesController extends Controller
      */
     public function destroy(categories $categories)
     {
-        //
+        $categori->delete();
+        return redirect('/categories');
     }
 }

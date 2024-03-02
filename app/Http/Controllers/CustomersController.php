@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\customers;
+use App\Models\customer;
 use App\Http\Requests\StorecustomersRequest;
 use App\Http\Requests\UpdatecustomersRequest;
 
@@ -15,7 +15,7 @@ class CustomersController extends Controller
     {
 
         //query eloquen
-        $customers = customer::all(); 
+        $customers = Customer::all(); 
         return view('customer.list', [
             'data' => $customers,
         ]);
@@ -35,22 +35,24 @@ class CustomersController extends Controller
     public function store(StorecustomersRequest $request)
     {
         Customer::create($request->all());
-        return redirect('/customer');
+        return redirect('/customers');
         
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(customers $customers)
+    public function show(customer $customer)
     {
-        //
+        return view('customer.add', [
+            'data' => $customer,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(customers $customers)
+    public function edit(customer $customer)
     {
         //
     }
@@ -58,17 +60,20 @@ class CustomersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatecustomersRequest $request, customers $customers)
+    public function update(UpdatecustomersRequest $request, customer $customer)
     {
-        //
+        $customer->fill($request->all());
+        $customer->save();
+
+         return redirect('/customers');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(customers $customers)
+    public function destroy(customer $customer)
     {
         $customer->delete();
-        return redirect('/customer');
+        return redirect('/customers');
     }
 }
