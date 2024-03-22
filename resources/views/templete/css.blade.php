@@ -9,6 +9,6 @@
 
 
 <!-- DataTables -->
-<script src="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"></script>
-<script src="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css"></script>
-<script src="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css"></script>
+<script src="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"></script>
+<script src="/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"></script>
+<script src="/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css"></script>

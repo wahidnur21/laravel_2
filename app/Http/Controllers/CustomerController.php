@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\customer;
-use App\Http\Requests\StorecustomersRequest;
-use App\Http\Requests\UpdatecustomersRequest;
+use App\Models\Customer;
+use App\Http\Requests\StoreCustomerRequest;
+use App\Http\Requests\UpdateCustomerRequest;
 
-class CustomersController extends Controller
+class CustomerController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
-        //query eloquen
         $customers = Customer::all(); 
+
         return view('customer.list', [
             'data' => $customers,
         ]);
+      
+       
     }
 
     /**
@@ -32,17 +33,20 @@ class CustomersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorecustomersRequest $request)
+    public function store(StoreCustomerRequest $request)
     {
         Customer::create($request->all());
-        return redirect('/customers');
+
+        return redirect('/customers')->with([
+            'mess' => 'Data berhasil di simpan',
+        ]);
         
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(customer $customer)
+    public function show(Customer $customer)
     {
         return view('customer.add', [
             'data' => $customer,
@@ -52,7 +56,7 @@ class CustomersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(customer $customer)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -60,20 +64,25 @@ class CustomersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatecustomersRequest $request, customer $customer)
+    public function update(UpdateCustomerRequest $request, Customer $customer)
     {
         $customer->fill($request->all());
         $customer->save();
 
-         return redirect('/customers');
+         return redirect('/customers')->with([
+            'mess' => 'Data berhasil disimpan',
+         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(customer $customer)
+    public function destroy(Customer $customer)
     {
         $customer->delete();
-        return redirect('/customers');
+        
+        return redirect('/customers')->with([
+            'mess' => 'Data berhasil dihapus',
+        ]);
     }
 }

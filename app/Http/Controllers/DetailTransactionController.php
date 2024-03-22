@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\detail_transactions;
-use App\Http\Requests\Storedetail_transactionsRequest;
-use App\Http\Requests\Updatedetail_transactionsRequest;
 
-class DetailTransactionsController extends Controller
+use App\Models\DetailTransaction;
+use App\Http\Requests\StoreDetailTransactionRequest;
+use App\Http\Requests\UpdateDetailTransactionRequest;
+
+class DetailTransactionController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('detail.list');
+          //query eloquen
+          $customers = Customer::all(); 
+          return view('customer.list', [
+              'data' => $customers,
+          ]);
     }
 
     /**
@@ -27,7 +32,7 @@ class DetailTransactionsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Storedetail_transactionsRequest $request)
+    public function store(StoreDetailTransactionRequest $request)
     {
         //
     }
@@ -51,7 +56,7 @@ class DetailTransactionsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatedetail_transactionsRequest $request, detail_transactions $detail_transactions)
+    public function update(UpdateDetailTransactionRequest $request, detail_transactions $detail_transactions)
     {
         //
     }

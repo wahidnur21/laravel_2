@@ -1,6 +1,6 @@
 @extends('templete.index')
 
-@section('title', 'customer')
+@section('title', 'categori')
 
 @section('content')
 
@@ -10,17 +10,19 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data_Customer</h1>
+            <h1>Data Kategori</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Customer</li>
+              <li class="breadcrumb-item active">Data Kategori</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
+
+    <form action="/categories/{{ @$data->id }}" method="POST">
 
     <!-- Main content -->
     <section class="content">
@@ -28,13 +30,13 @@
  
             <div class="card card-primary">
              <div class="card-header">
-             <h3 class="card-title">Quick Example<h3>
+             <h3 class="card-title">Input Kategori<h3>
              </div>
              
               <!-- /.card-header -->
               <!-- /.card-body -->
 
-               <form action="/customers/{{ @$data->id}}" method="POST">
+               
                 @if (@$data)
                   @method('PUT')
                 @endif
@@ -43,27 +45,13 @@
                 <div class="card-body">
                     <div class="form-group">           
                         <label for="id">Kode</label>
-                        <input type="text" class="form-control" name="id" placeholder="Kode" value="{{ @$data->id}}">
+                        <input type="text" class="form-control" name="id" placeholder="Kode" value="{{ @$data->id }}">
                     </div>
                     <div class="form-group">           
                         <label for="name">Nama</label>
-                        <input type="text" class="form-control" name="name" placeholder="Nama" value="{{ @$data->name}}">
+                        <input type="text" class="form-control" name="name" placeholder="Nama" value="{{ @$data->name }}">
                     </div>
-                    <div class="form-group">           
-                        <label for="address">Alamat</label>
-                        <input type="text" class="form-control" name="address" placeholder="Alamat" value="{{ @$data->address}}">
-                    </div>
-                    <div class="form-group">           
-                        <label for="exampleSelectRounded0">Jenis Kelamin</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="1" {{ @$data->gender == 1 ? 'checked' : ''}}>
-                        <label class="form-check-label" for="gender">Laki-laki</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="2" {{ @$data->gender == 2 ? 'checked' : ''}}>
-                        <label class="form-check-label" for="gender">Perempuan</label>
-                    </div>
-                </div>
+          
                 <div class="form-group">           
                         <label for="exampleSelectRounded0">Status</label>
                         <select name="status" class="custom-select rounded-0">

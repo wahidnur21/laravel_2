@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stuff;
+use App\Models\Category;
 use App\Http\Requests\StoreStuffRequest;
 use App\Http\Requests\UpdateStuffRequest;
+
+use Illuminate\Support\Facades\Storage;
 
 class StuffController extends Controller
 {
@@ -13,8 +16,8 @@ class StuffController extends Controller
      */
     public function index()
     {
-          //query eloquen
-          $stuffs = stuff::all(); 
+        $stuffs = stuff::with(['category'])->get();
+        
           return view('stuff.list', [
               'data' => $stuffs,
           ]);
@@ -25,7 +28,10 @@ class StuffController extends Controller
      */
     public function create()
     {
-        return view('stuff.add');
+        $categories = Category::where('status', 1)->get();
+        return view('stuff.add', [
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -33,8 +39,14 @@ class StuffController extends Controller
      */
     public function store(StoreStuffRequest $request)
     {
-        stuff::create($request->all());
-        return redirect('/stuffs');
+        $path = $request->file('file')->store('stuff');
+
+        $request->merge(['image' =>$path]);
+        Stuff::create($request->all());
+
+        return redirect('/stuffs')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
     }
 
     /**
@@ -63,7 +75,9 @@ class StuffController extends Controller
         $stuff->fill($request->all());
         $stuff->save();
 
-         return redirect('/stuffs');
+         return redirect('/stuffs')->with([
+            'mess' => 'Data Berhasl Disimpan',
+         ]);
     }
 
     /**
@@ -71,7 +85,12 @@ class StuffController extends Controller
      */
     public function destroy(Stuff $stuff)
     {
+        Storage::delete($stuff->image);
+
         $stuff->delete();
-        return redirect('/stuffs');
+        
+        return redirect('/stuffs')->with([
+            'mess' => 'Data Berhasl Dihapus',
+        ]);
     }
 }

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Stuff>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class StuffFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,10 +21,7 @@ class StuffFactory extends Factory
         return [
             'id' => $fake->unique()->numerify('k###'),
             'name' => $fake->word(),
-            'price' => $fake->numerify('###00'),
-            'unit' => $fake->randomElement(['box', 'sachet', 'buah']),
             'status' => $fake->randomElement([0, 1]),
-            'id_category' => 0,
         ];
     }
 }

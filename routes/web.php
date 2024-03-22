@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\TransactionsController;
-use App\Http\Controllers\DetailTransactionsController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DetailTransactionController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\StuffController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,35 +21,46 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('generateData', [AuthController::class, 'generateData']);
+
 Route::get('/', function () {
     return view('home');
+})->middleware('is.auth');
+
+Route::get('login', [AuthController::class, 'showLogin'])->middleware('is.not.auth');
+Route::post('login', [AuthController::class, 'actionLogin'])->middleware('is.not.auth');
+
+Route::middleware(['is.auth'])->group(function () {
+
+  Route::get('logout', [AuthController::class, 'actionLogout']);
+
+  Route::get('transactions', [TransactionController::class, 'index']);
+  Route::get('transactions/create', [TransactionController::class, 'create']);
+
+
+  Route::resource('customers', CustomerController::class);
+  Route::resource('categories', CategoryController::class);
+  Route::resource('users', UserController::class);
+  Route::resource('stuffs', StuffController::class);
+
+
+ 
 });
 
-Route::get('transactions', [TransactionsController::class, 'index']);
-Route::get('transactions/create', [TransactionsController::class, 'create']);
 
+ // Route::get('customers', [CustomersController::class, 'index']); // menampilkan data tabel
+  // Route::get('customers/create', [CustomersController::class, 'create']); // menampilka form untuk tambah data
+  // Route::post('customers', [CustomersController::class, 'store']); // menyimpan data baru dari form tambah (add)
+  // Route::get('customers/{customer}', [CustomersController::class, 'show']); // menampilkan form edit berdasarkan data yang terpilih
+  // Route::put('customers/{customer}', [CustomersController::class, 'update']); // menyimpan data yang di edit melelui form edit
+  // Route::post('customers/{customer}', [CustomersController::class, 'destroy']); // untuk menghapus data
 
- Route::resource('customers', CustomersController::class);
- Route::resource('categories', CategoriesController::class);
- Route::resource('users', UserController::class);
- Route::resource('stuffs', StuffController::class);
-
-
-
-
-//  Route::get('customers', [CustomersController::class, 'index']); // menampilkan data tabel
-//  Route::get('customers/create', [CustomersController::class, 'create']); // menampilka form untuk tambah data
-//  Route::post('customers', [CustomersController::class, 'store']); // menyimpan data baru dari form tambah (add)
-//  Route::get('customers/{customer}', [CustomersController::class, 'show']); // menampilkan form edit berdasarkan data yang terpilih
-//  Route::put('customers/{customer}', [CustomersController::class, 'update']); // menyimpan data yang di edit melelui form edit
-//  Route::delete('customers/{customer}', [CustomersController::class, 'destroy']); // untuk menghapus data
-
-// Route::get('categories', [CategoriesController::class, 'index']); // menampilkan data tabel
-// Route::get('categories/create', [CategoriesController::class, 'create']); // menampilka form untuk tambah data
-// Route::post('categories', [CategoriesController::class, 'store']); // menyimpan data baru dari form tambah (add)
-// Route::get('categories/{categori}', [CategoriesController::class, 'show']); // menampilkan form edit berdasarkan data yang terpilih
-// Route::put('categories/{categori}', [CategoriesController::class, 'update']); // menyimpan data yang di edit melelui form edit
-// Route::delete('categories/{categori}', [CategoriesController::class, 'destroy']); // untuk menghapus data
+ // Route::get('categories', [CategoriesController::class, 'index']); // menampilkan data tabel
+ // Route::get('categories/create', [CategoriesController::class, 'create']); // menampilka form untuk tambah data
+ // Route::post('categories', [CategoriesController::class, 'store']); // menyimpan data baru dari form tambah (add)
+ // Route::get('categories/{categori}', [CategoriesController::class, 'show']); // menampilkan form edit berdasarkan data yang terpilih
+ // Route::put('categories/{categori}', [CategoriesController::class, 'update']); // menyimpan data yang di edit melelui form edit
+ // Route::post('categories/{categori}', [CategoriesController::class, 'destroy']); // untuk menghapus data
 
 // Route::get('users', [UserController::class, 'index']); // menampilkan data tabel
 // Route::get('users/create', [UserController::class, 'create']); // menampilka form untuk tambah data
@@ -64,3 +76,8 @@ Route::get('transactions/create', [TransactionsController::class, 'create']);
 // Route::put('stuffs/{stuff}', [StuffController::class, 'update']); // menyimpan data yang di edit melelui form edit
 // Route::delete('stuffs/{stuff}', [StuffController::class, 'destroy']); // untuk menghapus data
 
+
+
+
+
+ 
